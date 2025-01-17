@@ -1,0 +1,4 @@
+#python test.py --trained_model craft_mlt_25k.pth --test_folder=../images --result_folder=detection_results
+python .\CRAFT-pytorch\test.py --trained_model .\CRAFT-pytorch\craft_mlt_25k.pth --test_folder=images --result_folder=detection_results\035_05 --text_threshold=0.1 --low_text=0.35
+python src/drawMask.py --coor_input_folder detection_results --input_folder images --output_real_image True --mask_output_folder outputs  
+python .\lama\bin\predict.py  model.path=G:\code\auto-text-removal\lama\big-lama indir=G:\code\auto-text-removal\outputs outdir=G:\code\auto-text-removal\results

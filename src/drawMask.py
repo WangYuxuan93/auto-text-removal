@@ -26,7 +26,9 @@ if __name__ == '__main__':
     for file in files:
         img = cv2.imread(file)
         img_mask = np.zeros((img.shape[0], img.shape[1]), dtype=np.uint8)
-        file_name_ext = file.split("/")[1]
+        print (file)
+        #file_name_ext = file.split("/")[1]
+        file_name_ext = os.path.basename(file)
 
         file_name = file_name_ext.split(".")[0]
         ext = file_name_ext.split(".")[1]
@@ -34,9 +36,11 @@ if __name__ == '__main__':
 
         radius = args.radius
         row, col, channel = img.shape
-
+        print (gt_file)
         with open(gt_file, "r", encoding="utf-8") as f:
             for line in f:
+                line = line.strip()
+                if line is '': continue
                 points = list(map(lambda x: int(x), line.strip().split(",")))
                 xy1 = (max(points[0] - radius, 0), max(points[1] - radius, 0))
                 xy2 = (min(points[2] + radius, col-1), max(points[3] - radius, 0))
